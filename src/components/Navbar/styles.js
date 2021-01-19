@@ -11,23 +11,32 @@ export const Container = styled.div`
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     letter-spacing:2px;
-    line-height: 1em;
-    padding: 2vh 5vw 0 5vw;
+    line-height: 4em;
+    padding: 0 0 0 0;
     justify-content: space-between;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    /* background-color: white; */
 `
+
 export const NavLinks = styled.div`
     display: flex;
-    width: 80%;
+    width: 100%;
     justify-content: space-around;
     align-items: center;
-    padding: 1vh 0 5vh 10vh;
+    padding: 0 0 0 0;
+    text-align: center;
 `
+
 export const NavBLink = styled(Link)`
     color: black;
     cursor: pointer;
     outline: none;
+    width: 100%;
     text-decoration: none;
     &:hover {
         color: #e36055;
     }
+    padding: 0 0 0 0 !important;
 `
