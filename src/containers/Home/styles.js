@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import 'typeface-montserrat';
 
 export const Hero = styled.div`
 
