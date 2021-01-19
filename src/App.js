@@ -4,7 +4,11 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import theme from './theme'
 import client from './client'
+import Navbar from './components/Navbar'
 import Home from './containers/Home'
+import Calendar from './containers/Calendar'
+import Courses from './containers/Courses'
+import Todo from './containers/Todo'
 import Login from './containers/Login'
 import Register from './containers/Register'
 
@@ -13,11 +17,16 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
         <div className="App">
-          <Switch>
-            <Route path="/Login" component={Login} />
-            <Route path="/Register" component={Register} />
-            <Route path="/" component={Home} />
-          </Switch>
+          <Navbar>
+            <Switch>
+              <Route path="/Login" component={Login} />
+              <Route path="/Register" component={Register} />
+              <Route path="/Calendar" component={Calendar} />
+              <Route path="/Courses" component={Courses} />
+              <Route path="/Todo" component={Todo} />
+              <Route path="/" component={Home} />
+            </Switch>
+          </Navbar>
         </div>
       </ApolloProvider>
     </ThemeProvider>
