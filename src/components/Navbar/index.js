@@ -8,7 +8,7 @@ const Navbar = ({children}) => (
     <NavBLink to="/">Home</NavBLink>
       <NavBLink to="/Calendar">Calendar</NavBLink>
       <NavBLink to="/Courses">Courses</NavBLink>
-      <NavBLink to="/Todo">Todo</NavBLink>
+      <NavBLink to="/AllTodo">Todo</NavBLink>
     </NavLinks> 
     </Container>
     {children}
