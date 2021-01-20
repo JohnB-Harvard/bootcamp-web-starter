@@ -15,7 +15,6 @@ const Login = () => {
   }] = useMutation(LOGIN, {
     variables: { email, password },
     onCompleted: ({ login: { token } }) => {
-      console.log(token)
       localStorage.setItem('token', token)
       history.push('/')
     },
@@ -23,20 +22,18 @@ const Login = () => {
   })
   return (
     <LoginDiv>
-      <form>
-        <LoginLabel htmlFor="email">Email: </LoginLabel>
-        <LoginInput id="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
+      <LoginLabel htmlFor="email">Email: </LoginLabel>
+      <LoginInput id="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
 
-        <LoginLabel htmlFor="password">Password: </LoginLabel>
-        <LoginInput id="password" value={password} type="password" onChange={e => setPassword(e.target.value)} placeholder="password" />
+      <LoginLabel htmlFor="password">Password: </LoginLabel>
+      <LoginInput id="password" value={password} type="password" onChange={e => setPassword(e.target.value)} placeholder="password" />
 
-        <SubmitButton
-          type="submit"
-          onClick={login}
-        >
+      <SubmitButton
+        type="submit"
+        onClick={login}
+      >
         Log In
-        </SubmitButton>
-      </form>
+      </SubmitButton>
     </LoginDiv>
   )
 }
