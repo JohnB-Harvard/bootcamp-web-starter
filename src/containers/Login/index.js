@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
-import { LoginDiv, LoginInput, LoginLabel, SubmitButton } from './styles'
+import {
+  LoginDiv, LoginInput, LoginLabel, SubmitButton,
+} from './styles'
 import { LOGIN } from './graphql'
 
 const Login = () => {
   const history = useHistory()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
-  const [auth, {
+  const [login, {
     loading: loginLoading, error: loginError, data: loginData, called: loginCalled,
-  }] = useMutation(LOGIN, { variables: { email, password } })
-
+  }] = useMutation(LOGIN, {
+    variables: { email, password },
+    onCompleted: ({ login: { token } }) => {
+      console.log(token)
+      localStorage.setItem('token', token)
+      history.push('/')
+    },
+    onError: err => { console.log(err) },
+  })
   return (
     <LoginDiv>
       <form>
@@ -23,18 +32,7 @@ const Login = () => {
 
         <SubmitButton
           type="submit"
-          onClick={() => {
-            auth()
-            try {
-              if (!loginLoading) {
-                localStorage.setItem('token', loginData.login.token)
-                history.push('/home')
-              }
-            } catch (err) {
-            console.log(err)
-            // pass. This is here b/c authData is undefined at first and this fix worked
-            }
-          }}
+          onClick={login}
         >
         Log In
         </SubmitButton>
