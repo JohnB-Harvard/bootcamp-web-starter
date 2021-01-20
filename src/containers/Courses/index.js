@@ -2,6 +2,7 @@ import React from 'react'
 import {
   FormTitle, FormContainer, FormLabel, Select, Input, SubmitButton, SubmitButtonContent, ButtonLogo,
 } from './styles'
+import { ADD_COURSE } from './graphql'
 
 const CourseForm = () => (
 
