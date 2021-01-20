@@ -40,12 +40,14 @@ const Register = () => {
       <RegisterInput id="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
 
       <RegisterLabel htmlFor="confirmEmail">Confirm Email: </RegisterLabel>
-      <RegisterInput id="confirmEmail" value={confirmEmail} onChange={e => setCEmail(e.target.email)} placeholder="Confirm Email" />
+      <RegisterInput id="confirmEmail" value={confirmEmail} onChange={e => setCEmail(e.target.value)} placeholder="Confirm Email" />
 
       <RegisterLabel htmlFor="password">Set Password: </RegisterLabel>
       <RegisterInput id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
 
-      <SubmitButton onClick={register}>MakeUser</SubmitButton>
+      <SubmitButton onClick={confirmEmail === email ? register : () => { console.log(email, confirmEmail) }}>
+        {confirmEmail === email ? 'Make User' : 'Ensure emails match'}
+      </SubmitButton>
     </RegisterDiv>
   )
 }

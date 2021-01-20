@@ -29,11 +29,12 @@ const Login = () => {
       <LoginInput id="password" value={password} type="password" onChange={e => setPassword(e.target.value)} placeholder="password" />
 
       <SubmitButton
-        type="submit"
         onClick={login}
       >
         Log In
       </SubmitButton>
+      <LoginLabel>New here? Click Below to create an account</LoginLabel>
+      <SubmitButton onClick={() => history.push('/Register')}>Register</SubmitButton>
     </LoginDiv>
   )
 }
