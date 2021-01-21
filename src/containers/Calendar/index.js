@@ -1,9 +1,11 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { useGlobalContext } from '../../utils/GlobalContext'
 
 const Calendar = () => {
+  const globalState = useGlobalContext()
   const history = useHistory()
-  if (!localStorage.getItem('token')) {
+  if (!globalState.isSignedIn) {
     history.push('/Login')
   }
   return (

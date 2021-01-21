@@ -3,10 +3,12 @@ import { useHistory } from 'react-router-dom'
 import {
   Hero, Title, Subtitle, CardContainer, RegiButton, CardsRight, CardsLeft, Card, CardLogo, RegiButtonContent, ButtonLogo,
 } from './styles'
+import { useGlobalContext } from '../../utils/GlobalContext'
 
 const Home = () => {
+  const globalState = useGlobalContext()
   const history = useHistory()
-  if (!localStorage.getItem('token')) {
+  if (!globalState.isSignedIn) {
     history.push('/Login')
   }
   return (

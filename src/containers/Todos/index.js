@@ -1,9 +1,11 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
+import { useHistory } from 'react-router-dom'
 import {
   FormTitle, FormContainer, FormLabel, Input, SubmitButton, SubmitButtonContent, ButtonLogo,
 } from './styles'
 import { GET_USER_TODOS } from './graphql'
+import { useGlobalContext } from '../../utils/GlobalContext'
 
 const TodoForm = () => (
 
@@ -53,15 +55,21 @@ const TodoList = () => {
   )
 }
 
-const Todos = () => (
+const Todos = () => {
+  const globalState = useGlobalContext()
+  const history = useHistory()
+  if (!globalState.isSignedIn) {
+    history.push('/Login')
+  }
+  return (
+    <FormContainer>
 
-  <FormContainer>
+      <TodoForm />
+      <TodoList />
 
-    <TodoForm />
-    <TodoList />
+    </FormContainer>
 
-  </FormContainer>
-
-)
+  )
+}
 
 export default Todos

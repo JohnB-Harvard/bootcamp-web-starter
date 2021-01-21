@@ -5,8 +5,10 @@ import {
   LoginDiv, LoginInput, LoginLabel, SubmitButton,
 } from './styles'
 import { LOGIN } from './graphql'
+import { useGlobalContext } from '../../utils/GlobalContext'
 
 const Login = () => {
+  const globalState = useGlobalContext()
   const history = useHistory()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
@@ -16,9 +18,9 @@ const Login = () => {
     variables: { email, password },
     onCompleted: ({ login: { token } }) => {
       localStorage.setItem('token', token)
-      history.push('/')
+      globalState.login(true)
     },
-    onError: err => { console.log(err) },
+    onError: () => { },
   })
   return (
     <LoginDiv>
