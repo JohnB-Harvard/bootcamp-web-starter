@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useQuery} from '@apollo/react-hooks'
+import { GET_USER_INFO } from './graphql'
 import {
   Hero, Title, Subtitle, CardContainer, RegiButton, CardsRight, CardsLeft, Card, CardLogo, RegiButtonContent, ButtonLogo,
 } from './styles'
@@ -9,12 +11,29 @@ const Home = () => {
   if (!localStorage.getItem('token')) {
     history.push('/Login')
   }
+
+  const {loading: viewerLoading, error: viewerError, data: viewerData} = useQuery(GET_USER_INFO)
+    if (viewerError) {
+        console.log(viewerError)
+        throw new Error('books query failed')
+    }
+
+  const [weather, setWeather] = useState('')
+  useEffect(() => {
+      const fetchData = async () => {
+        const res = await fetch('https://api.openweathermap.org/data/2.5/weather?q=cambridge&units=imperial&appid=886705b4c1182eb1c69f28eb8c520e20')
+        const data = await res.json()
+        setWeather(data.main.temp)
+      }
+      fetchData()
+  }, [])
+
   return (
     <Hero>
 
-      <Title>Product Name</Title>
-      <Subtitle>short, catchy slogan in a different, lighter font</Subtitle>
-
+      <Title>Hello, {viewerLoading? ' ': viewerData.userViewer.firstName}!</Title>
+      <Subtitle>Welcome to your Plan-i-tas.</Subtitle>
+      <Subtitle>The current temperature in Cambridge is {weather} degrees Fahrenheit</Subtitle>
       <CardContainer>
 
         <CardsRight>
