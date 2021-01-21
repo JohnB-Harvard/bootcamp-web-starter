@@ -37,6 +37,23 @@ export const NavBLink = styled(Link)`
     text-decoration: none;
     &:hover {
         color: #e36055;
+        text-decoration: underline;
     }
+    padding: 0 0 0 0 !important;
+`
+
+export const LogoutButton = styled.button`
+    color: white;
+    background-color: #e36055;
+    border: none;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1.5em;
+    &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    width: 50%;
     padding: 0 0 0 0 !important;
 `
