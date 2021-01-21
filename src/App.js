@@ -8,7 +8,7 @@ import Navbar from './components/Navbar'
 import Home from './containers/Home'
 import Calendar from './containers/Calendar'
 import Courses from './containers/Courses'
-import Todo from './containers/AllTodo'
+import Todo from './containers/Todos'
 import Login from './containers/Login'
 import Register from './containers/Register'
 
@@ -23,7 +23,7 @@ const App = () => (
               <Route path="/Register" component={Register} />
               <Route path="/Calendar" component={Calendar} />
               <Route path="/Courses" component={Courses} />
-              <Route path="/AllTodo" component={Todo} />
+              <Route path="/Todos" component={Todo} />
               <Route path="/" component={Home} />
             </Switch>
           </Navbar>
