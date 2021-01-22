@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import {
@@ -8,10 +8,16 @@ import { GET_USER, ADD_TODO } from './graphql'
 import { useGlobalContext } from '../../utils/GlobalContext'
 
 const TodoForm = () => {
-//   const { loading: userLoading, error: userError, data: userData } = useQuery(GET_USER)
-//   console.log(userData.userViewer)
-  const userId = '03ae5320-11a8-4f20-a51e-07309a3ff07b'
-
+    const [userId, setUserId] = useState('')
+  const { loading: userLoading, error: userError, data: userData } = useQuery(GET_USER, {
+      onCompleted: ({ userViewer: { id } }) => {
+        setUserId(id)
+      }
+  })
+  if (userError) {
+      console.log(userError)
+      throw new Error('query failed')
+  }
   const [name, setName] = useState()
   const [description, setDescription] = useState()
   const [addTodo, { error, loading }] = useMutation(ADD_TODO,
@@ -41,6 +47,7 @@ const TodoForm = () => {
   }
   return (
     <SubContainer>
+    <>
       <FormTitle>Add Todo</FormTitle>
 
       <FormLabel>To-Do</FormLabel>
@@ -59,6 +66,7 @@ const TodoForm = () => {
             Submit
         </SubmitButtonContent>
       </SubmitButton>
+    </>
     </SubContainer>
   )
 }
