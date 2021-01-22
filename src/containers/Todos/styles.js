@@ -3,16 +3,28 @@ import { tada } from 'react-animations'
  
 const ani = keyframes`${tada}`;
 
-export const FormContainer = styled.div`
+export const Container = styled.div`
 
   height: 100%;
   width: 90%; 
 
   display: flex; 
   justify-content: space-around;
-  flex-direction: column;
+  flex-direction: row;
   font-family: 'Montserrat', sans-serif;
   background-color: #FFF3F0;
+
+`
+
+export const SubContainer = styled.div`
+
+  height: 100%;
+  width: 100%; 
+
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  flex-direction: column;
 
 `
 

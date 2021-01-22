@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import {
-  FormTitle, FormContainer, FormLabel, Input, SubmitButton, SubmitButtonContent, ButtonLogo, Section, Sub, AddTodo, Todo
+  FormTitle, FormLabel, Input, SubmitButton, SubmitButtonContent, ButtonLogo, Container, Todo, SubContainer
 } from './styles'
 import { GET_USER, ADD_TODO } from './graphql'
 import { useGlobalContext } from '../../utils/GlobalContext'
@@ -47,17 +47,17 @@ const TodoForm = () => {
     throw new Error('add todo failed')
   }
   return (
-    <>
+    <SubContainer>
       <FormTitle>Add Todo</FormTitle>
 
-      <FormLabel>Title</FormLabel>
+      <FormLabel>To-Do</FormLabel>
       <br />
-      <Input id="name" value={name} onChange={e => setName(e.target.value)} placeholder="Enter title here..." required />
+      <Input id="name" value={name} onChange={e => setName(e.target.value)} placeholder="Enter action item here..." required />
 
       <br />
-      <FormLabel>Description</FormLabel>
+      <FormLabel>Notes</FormLabel>
       <br />
-      <Input id="description" value={description} onChange={e => setDescription(e.target.value)} placeholder="Enter description here..." />
+      <Input id="description" value={description} onChange={e => setDescription(e.target.value)} placeholder="Enter details here..." />
 
       <br />
       <SubmitButton className="bounce-button" onClick={handleSubmit}>
@@ -66,7 +66,7 @@ const TodoForm = () => {
             Submit
         </SubmitButtonContent>
       </SubmitButton>
-    </>
+    </SubContainer>
   )
 }
 
@@ -76,10 +76,10 @@ const TodoList = () => {
   if (loading) return <p>Loading</p>
   if (error) return `Error: ${error}`
   return (
-    <>
-      <p>My Todo List</p>
-      <li>{data.userViewer.todos.map(item => item.name)}</li>
-    </>
+    <SubContainer>
+      <FormTitle>Your To-Dos</FormTitle>
+      <Todo>{data.userViewer.todos.map(item => item.name)}</Todo>
+    </SubContainer>
   )
 }
 
@@ -90,12 +90,12 @@ const Todos = () => {
     history.push('/Login')
   }
   return (
-    <FormContainer>
+    <Container>
         
       <TodoForm />
       <TodoList />
 
-    </FormContainer>
+    </Container>
 
   )
 }
