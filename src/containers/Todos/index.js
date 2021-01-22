@@ -2,34 +2,43 @@ import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 import {
-  FormTitle, FormContainer, FormLabel, Input, SubmitButton, SubmitButtonContent, ButtonLogo,
+  FormTitle, FormContainer, FormLabel, Input, SubmitButton, SubmitButtonContent, ButtonLogo, Section, Sub, AddTodo, Todo
 } from './styles'
 import { GET_USER_TODOS } from './graphql'
 import { useGlobalContext } from '../../utils/GlobalContext'
 
 const TodoForm = () => (
 
-  <>
-    <FormTitle>Add Todo</FormTitle>
+  <AddTodo>
+    <FormTitle>Add To-Do</FormTitle>
 
-    <FormLabel for="name">Title</FormLabel>
-    <br />
-    <Input type="text" name="name" required />
+    <Section>
+
+        <Sub>
+
+          <FormLabel for="name">To-Do</FormLabel>
+          <Input type="text" name="name" required />
+
+        </Sub>
+        
+        <Sub>
+
+          <FormLabel for="start">To-Do Details</FormLabel>
+          <Input type="text" name="description" />
+
+        </Sub>
+
+    </Section>
 
     <br />
-    <FormLabel for="start">Description</FormLabel>
-    <br />
-    <Input type="text" name="description" />
-
-    <br />
-    <SubmitButton className="bounce-button">
+    <SubmitButton>
       <SubmitButtonContent>
         <ButtonLogo><span uk-icon="plus" ratio=".7" /></ButtonLogo>
             Submit
       </SubmitButtonContent>
     </SubmitButton>
 
-  </>
+  </AddTodo>
 
 )
 
@@ -45,13 +54,13 @@ const TodoList = () => {
       },
     },
   })
-  if (loading) return <p>Loading</p>
+  if (loading) return <p>Loading...</p>
   if (error) return `Error: ${error}`
   return (
-    <>
-      <p>My Todo List</p>
+    <AddTodo>
+      <FormTitle>My Todo List</FormTitle>
       <li>{data.userTodos.map(item => item.name)}</li>
-    </>
+    </AddTodo>
   )
 }
 
