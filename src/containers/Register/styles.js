@@ -8,8 +8,6 @@ const ani = keyframes`${tada}`;
 export const RegiField = styled.div`
 
     width: 100%;
-    /* background-color: green; */
-
     display: flex; 
     flex-direction: row;
     justify-content: space-evenly;
@@ -58,7 +56,6 @@ export const RegisterInput = styled.input`
     border: none;
     border-bottom: none;
     width: 100%;
-    margin: 10px 0px;
     transition: box-shadow 500ms ease;
     box-shadow: -5px 5px 0 0 #FFDFD7;
 
