@@ -13,7 +13,7 @@ const Navbar = ({ children }) => {
           <NavBLink to="/">Home</NavBLink>
           <NavBLink to="/Calendar">Calendar</NavBLink>
           <NavBLink to="/Courses">Courses</NavBLink>
-          <NavBLink to="/AllTodo">Todo</NavBLink>
+          <NavBLink to="/Todos">Todo</NavBLink>
           <LogoutButton onClick={globalState.logout}>
             <ButtonContent>
               <ButtonLogo><span uk-icon="sign-out" ratio="1" /></ButtonLogo>
