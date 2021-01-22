@@ -78,7 +78,7 @@ const TodoList = () => {
   return (
     <SubContainer>
       <FormTitle>Your To-Dos</FormTitle>
-      <Todo>{data.userViewer.todos.map(item => item.name)}</Todo>
+      {data.userViewer.todos.map(item => <Todo>{item.name}</Todo>)}
     </SubContainer>
   )
 }
