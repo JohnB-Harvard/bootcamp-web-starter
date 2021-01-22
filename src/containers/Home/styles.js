@@ -11,6 +11,7 @@ export const Hero = styled.div`
   flex-direction: column;
   font-family: 'Montserrat', sans-serif;
   background-color: #FFF3F0;
+  margin-top: 1.5em;
 
 `
 

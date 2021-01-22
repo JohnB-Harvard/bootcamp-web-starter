@@ -11,9 +11,9 @@ const theme = {
     error: '#FF522D',
     background: {
       primary: '#FFFFFF', // white
-      secondary: '#f5f5f5', // tiny gray
+      secondary: '#FFF3F0', // light pink
       teritary: '#E5E5E5', // light gray
-      quarternary: '#C4C4C4', // darker gray
+      quarternary: '#FFDFD7', // darker pink 
     },
     accents: {
       primary: '#6636EF', // purple

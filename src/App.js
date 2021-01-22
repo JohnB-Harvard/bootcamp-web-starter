@@ -11,23 +11,26 @@ import Courses from './containers/Courses'
 import Todo from './containers/Todos'
 import Login from './containers/Login'
 import Register from './containers/Register'
+import GlobalContext from './utils/GlobalContext'
 
 const App = () => (
   <Router>
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
-        <div className="App">
-          <Navbar>
-            <Switch>
-              <Route path="/Login" component={Login} />
-              <Route path="/Register" component={Register} />
-              <Route path="/Calendar" component={Calendar} />
-              <Route path="/Courses" component={Courses} />
-              <Route path="/Todos" component={Todo} />
-              <Route path="/" component={Home} />
-            </Switch>
-          </Navbar>
-        </div>
+        <GlobalContext>
+          <div className="App">
+            <Navbar>
+              <Switch>
+                <Route path="/Login" component={Login} />
+                <Route path="/Register" component={Register} />
+                <Route path="/Calendar" component={Calendar} />
+                <Route path="/Courses" component={Courses} />
+                <Route path="/Todos" component={Todo} />
+                <Route path="/" component={Home} />
+              </Switch>
+            </Navbar>
+          </div>
+        </GlobalContext>
       </ApolloProvider>
     </ThemeProvider>
   </Router>

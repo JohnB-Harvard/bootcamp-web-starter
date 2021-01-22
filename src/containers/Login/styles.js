@@ -1,43 +1,135 @@
-import styled from 'styled-components'
-
+import styled, { keyframes } from 'styled-components'
+import theme from '../../theme'
+import { tada } from 'react-animations'
+ 
+const ani = keyframes`${tada}`;
+ 
 export const LoginInput = styled.input`
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5em;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3em;
+    height: 2em;
     border: none;
     border-bottom: none;
     margin: 10px 0px;
-    transition: border-bottom .25s ease;
+    transition: box-shadow 500ms ease;
+    box-shadow: -5px 5px 0 0 #FFDFD7;
+
     &:hover{
-        border-bottom: 2px solid #e36055;
+        
+        box-shadow: -2px 2px 0 0 #FFDFD7;
+
     }
+
     &:focus{
-        border: solid;
-        border-width: 2px;
-        border-color: #e36055;
+
+        outline-style: solid;
+        outline-color: #FFDFD7;
+        outline-width: 2px;
+
     }
+
+`
+
+
+export const LoginTitle = styled.h1`
+
+    width: 100%; 
+    font-size: xx-large; 
+    text-align: center;
+    font-family: 'Montserrat', 'sans-serif';
+    margin-bottom: 2em;
+
 `
 
 export const LoginDiv = styled.div`
+
     display: flex;
     flex-direction: column;
-    background-color: #DDDDDD;
-    width: 100%;
+    background-color: ${theme.colors.background.secondary};
+    width: 80%;
+    height: 100%;
+    justify-content: center;
+    margin-top: 1.5em;
+
 `
 
 export const LoginLabel = styled.label`
-    font-family: 'Roboto', sans-serif;
+
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.5em;
+    font-weight: bold;
+    color: black;
     display: block;
+
 `
 
+
+// export const  = styled.button`
+//     background-color: #FFDFD7;
+//     border: none;
+//     color: white;
+    
+// `
+
 export const SubmitButton = styled.button`
-    display: block;
-    background-color: #e36055;
-    border: none;
-    color: white;
-    text-align: center;
+
+  font-family: 'Montserrat', sans-serif;
+  margin: auto;
+  margin: 0 0 0 0;
+  border-radius: 5px;
+  width: 15vw;
+  height: 7vh;
+  border: solid 1px black;
+  background-color: white;
+  text-align: center;
     text-decoration: none;
     padding: 10px 30px;
     font-size: 1.5em;
-    margin: 10px;
+    margin-right: auto;
+    margin-left: auto; 
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+  transition-duration: 500ms;
+  font-size: large;
+  outline: none;
+
+  &&:hover {
+
+    cursor: pointer;
+    animation: 1s ${ani};
+
+  }
+
+`
+
+export const LinkButton = styled.span`
+
+  background-color: transparent; 
+  border: none; 
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  color: black;
+  border-bottom: solid black 2px;
+
+  &&:hover {
+
+    cursor: pointer;
+
+  }
+
+`
+
+export const RegisterLabel = styled.label`
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  color: black;
+  display: block;
+  justify-self: flex-end;
+  align-self: center;
+
 `
