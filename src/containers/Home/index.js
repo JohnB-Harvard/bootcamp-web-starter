@@ -72,13 +72,13 @@ const Home = () => {
         </CardsLeft>
 
       </CardContainer>
-
+{/* 
       <RegiButton className="bounce-button">
         <RegiButtonContent>
           <ButtonLogo><span uk-icon="sign-in" ratio="1.3" /></ButtonLogo>
 Sign Up!
         </RegiButtonContent>
-      </RegiButton>
+      </RegiButton> */}
 
     </Hero>
 
