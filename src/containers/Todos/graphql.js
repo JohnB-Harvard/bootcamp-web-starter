@@ -1,10 +1,24 @@
 import gql from 'graphql-tag'
 
-export const GET_USER_TODOS = gql`
-query userTodos($RegisterInput: RegisterInput!){
-  userTodos(user: $RegisterInput){
+export const GET_USER = gql`
+query userViewer {
+  userViewer {
+    id
+    email
+    firstName
+    lastName
+    todos {
+        name
+        description
+    }
+  }
+}
+`
+export const ADD_TODO = gql`
+mutation addTodo($input: addTodoInput!){
+  addTodo(input: $input){
     name
-    desc
+    description
   }
 }
 `
