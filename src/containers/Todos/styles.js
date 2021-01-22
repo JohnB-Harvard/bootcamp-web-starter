@@ -1,4 +1,4 @@
-import styled, {keyframes} from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { tada } from 'react-animations'
  
 const ani = keyframes`${tada}`;

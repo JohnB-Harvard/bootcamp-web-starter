@@ -16,16 +16,16 @@ const TodoForm = () => {
   const [description, setDescription] = useState()
   const [addTodo, { error, loading }] = useMutation(ADD_TODO,
     {
-      update: (client, { data }) => {
-        try {
-          const temp = client.readQuery({ query: GET_USER })
-          temp.userViewer.todos = [...temp.userViewer.todos, data.addTodo]
+    //   update: (client, { data }) => {
+    //     try {
+    //       const temp = client.readQuery({ query: GET_USER })
+    //       temp.userViewer.todos = [...temp.userViewer.todos, data.addTodo]
 
-          client.writeQuery({ query: GET_USER, temp })
-        } catch (error) {
-          throw new Error('update failed')
-        }
-      },
+    //       client.writeQuery({ query: GET_USER, temp })
+    //     } catch (error) {
+    //       throw new Error('update failed')
+    //     }
+    //   },
       variables: {
         input: {
           name,

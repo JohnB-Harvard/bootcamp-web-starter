@@ -16,10 +16,8 @@ const Navbar = ({ children }) => {
           <NavBLink to="/AllTodo">Todo</NavBLink>
           <LogoutButton onClick={globalState.logout}>
             <ButtonContent>
-              
               <ButtonLogo><span uk-icon="sign-out" ratio="1" /></ButtonLogo>
               Log Out
-              
             </ButtonContent>
           </LogoutButton>
         </NavLinks>

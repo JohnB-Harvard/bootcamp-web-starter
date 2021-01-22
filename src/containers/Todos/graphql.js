@@ -20,4 +20,5 @@ mutation addTodo($input: addTodoInput!){
     name
     description
   }
+}
 `
