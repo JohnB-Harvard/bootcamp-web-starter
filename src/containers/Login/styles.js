@@ -50,6 +50,7 @@ export const LoginDiv = styled.div`
     width: 80%;
     height: 100%;
     justify-content: center;
+    margin-top: 1.5em;
 
 `
 
