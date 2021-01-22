@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import {
-  FormTitle, FormContainer, FormLabel, Select, Input, SubmitButton, SubmitButtonContent, ButtonLogo, Section, Time
+  FormTitle, FormContainer, FormLabel, Select, Input, SubmitButton, SubmitButtonContent, ButtonLogo, Section, Time, ButtonLink
 } from './styles'
 import { ADD_COURSE } from './graphql'
 import { useGlobalContext } from '../../utils/GlobalContext'
@@ -9,9 +9,9 @@ import { useGlobalContext } from '../../utils/GlobalContext'
 const CourseForm = () => {
   const globalState = useGlobalContext()
   const history = useHistory()
-  if (!globalState.isSignedIn) {
-    history.push('/Login')
-  }
+  // if (!globalState.isSignedIn) {
+  //   history.push('/Login')
+  // }
   const url = 'http://www.google.com/calendar/render?action=TEMPLATE&text=Custom Event&dates=20200121T224000Z/20200122T224000Z&details=An event that is customized&location=zoom link https://stackoverflow.com/questions/10488831/link-to-add-to-google-calendar&trp=true&sprop=name:'
   return (
     <FormContainer>
@@ -39,9 +39,13 @@ const CourseForm = () => {
           <Time type="time" name="end" min="00:00" max="21:59" required placeholder="End Time" />
         </Section>
         <br />
-        <br />
-        <Section>
 
+        <FormLabel htmlFor="loc">Course Location</FormLabel>
+        <Input type="text" name="loc"  />
+        <br />
+
+
+        <Section>
           {/* submit to list button  */}
           <SubmitButton>
             <SubmitButtonContent>
@@ -51,16 +55,17 @@ const CourseForm = () => {
           </SubmitButton>
 
           {/* add to cal button  */}
-          <SubmitButton>
-            <SubmitButtonContent>
-              <ButtonLogo><span uk-icon="calendar" ratio=".7" /></ButtonLogo>
-              <a href={url} target="_" rel="noopenner norefferer nofollow">
-                Add to My Calendar
-              </a>
-            </SubmitButtonContent>
-          </SubmitButton>
-
+          <ButtonLink href={url} target="_" rel="noopenner norefferer nofollow">
+            <SubmitButton>
+              <SubmitButtonContent>
+                <ButtonLogo><span uk-icon="calendar" ratio=".7" /></ButtonLogo>
+                  Add to My Calendar
+              </SubmitButtonContent>
+            </SubmitButton>
+          </ButtonLink>
+          
         </Section>
+
     </FormContainer>
 
   )

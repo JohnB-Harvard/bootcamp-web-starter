@@ -49,14 +49,14 @@ const TodoForm = () => {
     <SubContainer>
     <>
       <FormTitle>Add Todo</FormTitle>
+      <br />
+
 
       <FormLabel>To-Do</FormLabel>
-      <br />
       <Input id="name" value={name} onChange={e => setName(e.target.value)} placeholder="Enter action item here..." required />
 
       <br />
       <FormLabel>Notes</FormLabel>
-      <br />
       <Input id="description" value={description} onChange={e => setDescription(e.target.value)} placeholder="Enter details here..." />
 
       <br />
