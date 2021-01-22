@@ -10,22 +10,12 @@ import { useGlobalContext } from '../../utils/GlobalContext'
 const TodoForm = () => {
 //   const { loading: userLoading, error: userError, data: userData } = useQuery(GET_USER)
 //   console.log(userData.userViewer)
-  const userId = 'd8960cd1-d34e-4766-9bf1-108a010b03d6'
+  const userId = '03ae5320-11a8-4f20-a51e-07309a3ff07b'
 
   const [name, setName] = useState()
   const [description, setDescription] = useState()
   const [addTodo, { error, loading }] = useMutation(ADD_TODO,
     {
-    //   update: (client, { data }) => {
-    //     try {
-    //       const temp = client.readQuery({ query: GET_USER })
-    //       temp.userViewer.todos = [...temp.userViewer.todos, data.addTodo]
-
-    //       client.writeQuery({ query: GET_USER, temp })
-    //     } catch (error) {
-    //       throw new Error('update failed')
-    //     }
-    //   },
       variables: {
         input: {
           name,
@@ -33,10 +23,13 @@ const TodoForm = () => {
           userId,
         },
       },
+      refetchQueries: () => ({ query: GET_USER })
     })
   const handleSubmit = async () => {
     try {
       await addTodo()
+      setName("")
+      setDescription("")
     } catch (err) {
       console.log('submit error', err)
     }
@@ -75,10 +68,11 @@ const TodoList = () => {
   const { loading, error, data } = useQuery(GET_USER)
   if (loading) return <p>Loading</p>
   if (error) return `Error: ${error}`
+  console.log(data.userViewer.todos)
   return (
     <>
       <p>My Todo List</p>
-      <li>{data.userViewer.todos.map(item => item.name)}</li>
+      {data.userViewer.todos.map(item => <li>{item.name}</li>)}
     </>
   )
 }
