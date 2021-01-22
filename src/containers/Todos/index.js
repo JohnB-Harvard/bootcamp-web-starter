@@ -8,7 +8,7 @@ import { GET_USER, ADD_TODO } from './graphql'
 import { useGlobalContext } from '../../utils/GlobalContext'
 
 const TodoForm = () => {
-    const [userId, setUserId] = useState('')
+  const [userId, setUserId] = useState('')
   const { loading: userLoading, error: userError, data: userData } = useQuery(GET_USER, {
       onCompleted: ({ userViewer: { id } }) => {
         setUserId(id)
@@ -29,7 +29,17 @@ const TodoForm = () => {
           userId,
         },
       },
-      refetchQueries: () => ({ query: GET_USER })
+      update: (cache, { data }) => {
+        try {
+          const temp = cache.readQuery({ query: GET_USER })
+          temp.userViewer.todos = [...temp.userViewer.todos, data.addTodo]
+          console.log(temp.userViewer.todos)
+          cache.writeQuery({ query: GET_USER}, temp)
+        } catch (err) {
+          console.log(err)
+          throw new Error('update failed')
+        }
+      }
     })
   const handleSubmit = async () => {
     try {

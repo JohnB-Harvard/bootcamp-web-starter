@@ -24,7 +24,10 @@ export const SubContainer = styled.div`
   display: flex;
   justify-content: center; 
   flex-direction: column;
-
+  
+  &&:nth-of-type(2) {
+  align-items: center;
+  }
 `
 
 export const AddTodo = styled.div`
