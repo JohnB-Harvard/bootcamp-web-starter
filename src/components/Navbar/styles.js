@@ -43,17 +43,39 @@ export const NavBLink = styled(Link)`
 `
 
 export const LogoutButton = styled.button`
-    color: white;
-    background-color: #e36055;
-    border: none;
-    text-decoration: none;
-    font-weight: 700;
+
+    font-family: 'Roboto', sans-serif;
     font-size: 1em;
-    line-height: 1.5em;
-    &:hover {
-        text-decoration: underline;
-        cursor: pointer;
-    }
-    width: 50%;
+    font-weight: 700;
+    letter-spacing:2px;
+    color: black;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-decoration: none;
     padding: 0 0 0 0 !important;
+
+    outline: none;
+
+`
+
+export const ButtonLogo = styled.span`
+
+  margin-right: 10px;
+  &:hover {
+        color: #e36055;
+        text-decoration: underline;
+    }
+
+`
+
+export const ButtonContent = styled.div`
+
+  margin: auto;
+  background-color: #FFF3F0;
+  &:hover {
+        color: #e36055;
+        text-decoration: underline;
+    }
+
 `
