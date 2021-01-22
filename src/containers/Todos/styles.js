@@ -10,7 +10,7 @@ export const FormContainer = styled.div`
 
   display: flex; 
   justify-content: space-around;
-  flex-direction: row;
+  flex-direction: column;
   font-family: 'Montserrat', sans-serif;
   background-color: #FFF3F0;
 
