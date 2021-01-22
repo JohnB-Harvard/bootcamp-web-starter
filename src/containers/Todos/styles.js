@@ -3,7 +3,7 @@ import { tada } from 'react-animations'
  
 const ani = keyframes`${tada}`;
 
-export const FormContainer = styled.div`
+export const Container = styled.div`
 
   height: 100%;
   width: 90%; 
@@ -14,6 +14,20 @@ export const FormContainer = styled.div`
   font-family: 'Montserrat', sans-serif;
   background-color: #FFF3F0;
 
+`
+
+export const SubContainer = styled.div`
+
+  height: 100%;
+  width: 100%; 
+
+  display: flex;
+  justify-content: center; 
+  flex-direction: column;
+  
+  &&:nth-of-type(2) {
+  align-items: center;
+  }
 `
 
 export const AddTodo = styled.div`

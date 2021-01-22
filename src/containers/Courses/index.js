@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
-  FormTitle, FormContainer, FormLabel, Select, Input, SubmitButton, SubmitButtonContent, ButtonLogo, Section, Time
+  FormTitle, FormContainer, FormLabel, Select, Input, SubmitButton, SubmitButtonContent, ButtonLogo, Section, Time, ButtonLink
 } from './styles'
 import { ADD_COURSE } from './graphql'
 import { useGlobalContext } from '../../utils/GlobalContext'
@@ -55,9 +55,13 @@ const CourseForm = () => {
           <Time value={endTime} onChange={e => setEndTime(e.target.value)} type="time" name="end" min="00:00" max="21:59" required placeholder="End Time" />
         </Section>
         <br />
-        <br />
-        <Section>
 
+        <FormLabel htmlFor="loc">Course Location</FormLabel>
+        <Input type="text" name="loc"  />
+        <br />
+
+
+        <Section>
           {/* submit to list button  */}
           <SubmitButton onClick={() => console.log(startTime.replace(':',''), endTime.replace(':',''))}>
             <SubmitButtonContent>
@@ -67,16 +71,17 @@ const CourseForm = () => {
           </SubmitButton>
 
           {/* add to cal button  */}
-          <SubmitButton>
-            <SubmitButtonContent>
-              <ButtonLogo><span uk-icon="calendar" ratio=".7" /></ButtonLogo>
-              <a href={url} target="_" rel="noopenner norefferer nofollow">
-                Add to My Calendar
-              </a>
-            </SubmitButtonContent>
-          </SubmitButton>
-
+          <ButtonLink href={url} target="_" rel="noopenner norefferer nofollow">
+            <SubmitButton>
+              <SubmitButtonContent>
+                <ButtonLogo><span uk-icon="calendar" ratio=".7" /></ButtonLogo>
+                  Add to My Calendar
+              </SubmitButtonContent>
+            </SubmitButton>
+          </ButtonLink>
+          
         </Section>
+
     </FormContainer>
 
   )

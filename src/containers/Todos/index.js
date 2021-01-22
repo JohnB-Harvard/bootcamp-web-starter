@@ -1,31 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import {
-  FormTitle, FormContainer, FormLabel, Input, SubmitButton, SubmitButtonContent, ButtonLogo, Section, Sub, AddTodo, Todo
+    FormTitle, FormLabel, Input, SubmitButton, SubmitButtonContent, ButtonLogo, Container, Todo, SubContainer
 } from './styles'
 import { GET_USER, ADD_TODO } from './graphql'
 import { useGlobalContext } from '../../utils/GlobalContext'
 
 const TodoForm = () => {
-//   const { loading: userLoading, error: userError, data: userData } = useQuery(GET_USER)
-//   console.log(userData.userViewer)
-  const userId = 'd8960cd1-d34e-4766-9bf1-108a010b03d6'
-
+  const [userId, setUserId] = useState('')
+  const { loading: userLoading, error: userError, data: userData } = useQuery(GET_USER, {
+      onCompleted: ({ userViewer: { id } }) => {
+        setUserId(id)
+      }
+  })
+  if (userError) {
+      console.log(userError)
+      throw new Error('query failed')
+  }
   const [name, setName] = useState()
   const [description, setDescription] = useState()
   const [addTodo, { error, loading }] = useMutation(ADD_TODO,
     {
-    //   update: (client, { data }) => {
-    //     try {
-    //       const temp = client.readQuery({ query: GET_USER })
-    //       temp.userViewer.todos = [...temp.userViewer.todos, data.addTodo]
-
-    //       client.writeQuery({ query: GET_USER, temp })
-    //     } catch (error) {
-    //       throw new Error('update failed')
-    //     }
-    //   },
       variables: {
         input: {
           name,
@@ -33,10 +29,23 @@ const TodoForm = () => {
           userId,
         },
       },
+      update: (cache, { data }) => {
+        try {
+          const temp = cache.readQuery({ query: GET_USER })
+          temp.userViewer.todos = [...temp.userViewer.todos, data.addTodo]
+          console.log(temp.userViewer.todos)
+          cache.writeQuery({ query: GET_USER}, temp)
+        } catch (err) {
+          console.log(err)
+          throw new Error('update failed')
+        }
+      }
     })
   const handleSubmit = async () => {
     try {
       await addTodo()
+      setName("")
+      setDescription("")
     } catch (err) {
       console.log('submit error', err)
     }
@@ -47,17 +56,18 @@ const TodoForm = () => {
     throw new Error('add todo failed')
   }
   return (
+    <SubContainer>
     <>
       <FormTitle>Add Todo</FormTitle>
+      <br />
 
-      <FormLabel>Title</FormLabel>
-      <br />
-      <Input id="name" value={name} onChange={e => setName(e.target.value)} placeholder="Enter title here..." required />
+
+      <FormLabel>To-Do</FormLabel>
+      <Input id="name" value={name} onChange={e => setName(e.target.value)} placeholder="Enter action item here..." required />
 
       <br />
-      <FormLabel>Description</FormLabel>
-      <br />
-      <Input id="description" value={description} onChange={e => setDescription(e.target.value)} placeholder="Enter description here..." />
+      <FormLabel>Notes</FormLabel>
+      <Input id="description" value={description} onChange={e => setDescription(e.target.value)} placeholder="Enter details here..." />
 
       <br />
       <SubmitButton className="bounce-button" onClick={handleSubmit}>
@@ -67,6 +77,7 @@ const TodoForm = () => {
         </SubmitButtonContent>
       </SubmitButton>
     </>
+    </SubContainer>
   )
 }
 
@@ -75,11 +86,12 @@ const TodoList = () => {
   const { loading, error, data } = useQuery(GET_USER)
   if (loading) return <p>Loading</p>
   if (error) return `Error: ${error}`
+  console.log(data.userViewer.todos)
   return (
-    <>
-      <p>My Todo List</p>
-      <li>{data.userViewer.todos.map(item => item.name)}</li>
-    </>
+    <SubContainer>
+      <FormTitle>Your To-Dos</FormTitle>
+      {data.userViewer.todos.map(item => <Todo>{item.name}</Todo>)}
+    </SubContainer>
   )
 }
 
@@ -90,12 +102,12 @@ const Todos = () => {
     history.push('/Login')
   }
   return (
-    <FormContainer>
-
+    <Container>
+        
       <TodoForm />
       <TodoList />
 
-    </FormContainer>
+    </Container>
 
   )
 }
