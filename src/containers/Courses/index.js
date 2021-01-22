@@ -9,9 +9,9 @@ import { useGlobalContext } from '../../utils/GlobalContext'
 const CourseForm = () => {
   const globalState = useGlobalContext()
   const history = useHistory()
-  // if (!globalState.isSignedIn) {
-  //   history.push('/Login')
-  // }
+  if (!globalState.isSignedIn) {
+    history.push('/Login')
+  }
   const url = 'http://www.google.com/calendar/render?action=TEMPLATE&text=Custom Event&dates=20200121T224000Z/20200122T224000Z&details=An event that is customized&location=zoom link https://stackoverflow.com/questions/10488831/link-to-add-to-google-calendar&trp=true&sprop=name:'
   return (
     <FormContainer>
