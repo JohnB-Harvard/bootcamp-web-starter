@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
-import React, { createContext, useContext, useState, useMemo } from 'react'
+import React, {
+  createContext, useContext, useState, useMemo,
+} from 'react'
 import { useHistory } from 'react-router-dom'
 import { VIEWER_QUERY } from './graphql'
 

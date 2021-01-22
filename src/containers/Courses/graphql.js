@@ -7,3 +7,14 @@ export const ADD_COURSE = gql`
         }
     }
 `
+
+export const VIEWER_QUERY = gql`
+    query userViewer{
+        userViewer{
+            id,
+            firstName,
+            lastName,
+            email,
+        }
+    }
+`
