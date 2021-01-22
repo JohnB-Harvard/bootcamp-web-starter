@@ -6,10 +6,16 @@ import {
 import { ADD_COURSE } from './graphql'
 import { useGlobalContext } from '../../utils/GlobalContext'
 
-const genURLs = (DOW) => {
-  for (const day in DOW) {
-    console.log(day)
+const genURLs = (DOW, course, location, startTime, endTime) => {
+  const URLs = []
+  const dates = [20210125, 20210126, 20210127, 20210128, 20210129]
+  for (let i=0; i<5; i++) {
+    if(DOW[i]) {
+      const date = dates[i]
+      URLs.push(`http://www.google.com/calendar/render?action=TEMPLATE&text=${course}&dates=${date}T${startTime}00/${date}T${endTime}00&location=${location}&recur=RRULE:FREQ=WEEKLY&trp=true&sprop=name:`)
+    }
   }
+  URLs.forEach(url => window.open(url, '_blank'))
 }
 
 const CourseForm = () => {
@@ -22,15 +28,13 @@ const CourseForm = () => {
 
   // Local Variables to hold things
   const [course, setCourse] = useState('')
-  const location = 'Zoom Link: LINK'
+  const [location, setLocation] = useState('')
   const recurring = 'RRULE:FREQ=WEEKLY'
   const DOWReducer = (prevState, payload) => ({...prevState, ...payload})
   const [DOW, setDOW] = useReducer(DOWReducer, [false,false,false,false,false])
-  const [date, setDate] = useState('')
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
-  console.log(DOW)
-  const url = `http://www.google.com/calendar/render?action=TEMPLATE&text=${course}&dates=${date}T${startTime}00/${date}T${endTime}00&location=${location}&recur=${recurring}&trp=true&sprop=name:`
+  // const url = `http://www.google.com/calendar/render?action=TEMPLATE&text=${course}&dates=${date}T${startTime}00/${date}T${endTime}00&location=${location}&recur=${recurring}&trp=true&sprop=name:`
   return (
     <FormContainer>
       <FormTitle>Add a New Course</FormTitle>
@@ -57,13 +61,13 @@ const CourseForm = () => {
         <br />
 
         <FormLabel htmlFor="loc">Course Location</FormLabel>
-        <Input type="text" name="loc"  />
+        <Input type="text" name="loc" value={location} onChange={e => setLocation(e.target.value)} />
         <br />
 
 
         <Section>
           {/* submit to list button  */}
-          <SubmitButton onClick={() => console.log(startTime.replace(':',''), endTime.replace(':',''))}>
+          <SubmitButton onClick={() => {genURLs(DOW, course, location, startTime.replace(':',''), endTime.replace(':',''))}}>
             <SubmitButtonContent>
               <ButtonLogo><span uk-icon="plus" ratio=".7" /></ButtonLogo>
                 Submit
@@ -71,7 +75,7 @@ const CourseForm = () => {
           </SubmitButton>
 
           {/* add to cal button  */}
-          <ButtonLink href={url} target="_" rel="noopenner norefferer nofollow">
+          <ButtonLink href='#' /*onClick={genURLs(DOW, course, location, startTime.replace(':',''), endTime.replace(':',''))}*/>
             <SubmitButton>
               <SubmitButtonContent>
                 <ButtonLogo><span uk-icon="calendar" ratio=".7" /></ButtonLogo>
